@@ -21,7 +21,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git url: 'https://github.com/superpangE/accounting-book-api.git', // 본인 GitHub 저장소 URL로 변경
-                    branch: 'main'
+                    branch: 'main',
                     credentialsId: "${GITHUB_CREDENTIALS_ID}" // 비공개 저장소인 경우 주석 해제
             }
         }
