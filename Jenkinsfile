@@ -6,9 +6,10 @@ pipeline {
         GITHUB_CREDENTIALS_ID = 'cdpkct' // 본인 GitHub 자격 증명 ID로 변경 (없으면 주석 처리)
 
         // Database Credentials (Jenkins Credentials ID로 설정해야 합니다)
-        DB_USER = credentials('DATABASE_USER')
-        DB_PASSWORD = credentials('DATABASE_PASSWORD')
-        DB_HOST = credentials('MYSQL_DATABASE_PORT')
+        DATABASE_USER = credentials('DATABASE_USER')
+        DATABASE_PASSWORD = credentials('DATABASE_PASSWORD')
+        DATABASE_HOST = credentials('DATABASE_HOST')
+        MYSQL_DATABASE_PORT = credentials('MYSQL_DATABASE_PORT')
 
         // Docker 이미지 및 컨테이너 정보
         DOCKER_IMAGE_NAME = "accounting-book-api"
