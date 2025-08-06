@@ -44,9 +44,10 @@ pipeline {
                     
                     // 환경 변수 목록 구성
                     def envArgsList = [
-                        "DB_USER=${DB_USER}",
-                        "DB_PASSWORD=${DB_PASSWORD}",
-                        "DB_HOST=${DB_HOST}"
+                        "DATABASE_USER=${DATABASE_USER}",
+                        "DATABASE_PASSWORD=${DATABASE_PASSWORD}",
+                        "DATABASE_HOST=${DATABASE_HOST}"
+                        "MYSQL_DATABASE_PORT=${MYSQL_DATABASE_PORT}"
                     ]
                    
                     // 환경 변수 문자열로 변환
