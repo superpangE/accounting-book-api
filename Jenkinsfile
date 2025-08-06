@@ -46,7 +46,7 @@ pipeline {
                     def envArgsList = [
                         "DATABASE_USER=${DATABASE_USER}",
                         "DATABASE_PASSWORD=${DATABASE_PASSWORD}",
-                        "DATABASE_HOST=${DATABASE_HOST}"
+                        "DATABASE_HOST=${DATABASE_HOST}",
                         "MYSQL_DATABASE_PORT=${MYSQL_DATABASE_PORT}"
                     ]
                    
