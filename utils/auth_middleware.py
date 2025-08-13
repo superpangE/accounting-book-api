@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_TOKEN = os.getenv("SECRET_TOKEN")
 
 def token_required(f):
     @wraps(f)
@@ -18,7 +18,7 @@ def token_required(f):
             return jsonify({'message': 'Token is missing!'}), 401
 
         try:
-            data = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+            data = jwt.decode(token, SECRET_TOKEN, algorithms=['HS256'])
             g.user_id = data['user_id'] # Store user_id in Flask's global context
         except jwt.ExpiredSignatureError:
             return jsonify({'message': 'Token has expired!'}), 401
