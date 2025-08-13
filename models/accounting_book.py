@@ -3,6 +3,7 @@ from config.database import db
 
 class AccountingBook(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.String(80), nullable=False) # Added user_id column
     card = db.Column(db.String(80), nullable=False)
     date = db.Column(db.Date, nullable=False)
     amount = db.Column(db.Integer, nullable=False)
@@ -18,6 +19,7 @@ class AccountingBook(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'user_id': self.user_id, # Added user_id to dict
             'card': self.card,
             'date': self.date.isoformat(),
             'amount': self.amount,

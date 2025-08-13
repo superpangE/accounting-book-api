@@ -10,6 +10,7 @@ pipeline {
         DATABASE_PASSWORD = credentials('DATABASE_PASSWORD')
         DATABASE_HOST = credentials('DATABASE_HOST')
         MYSQL_DATABASE_PORT = credentials('MYSQL_DATABASE_PORT')
+        SECRET_KEY = credentials('SECRET_KEY')
 
         // Docker 이미지 및 컨테이너 정보
         DOCKER_IMAGE_NAME = "accounting-book-api"
@@ -47,7 +48,8 @@ pipeline {
                         "DATABASE_USER=${DATABASE_USER}",
                         "DATABASE_PASSWORD=${DATABASE_PASSWORD}",
                         "DATABASE_HOST=${DATABASE_HOST}",
-                        "MYSQL_DATABASE_PORT=${MYSQL_DATABASE_PORT}"
+                        "MYSQL_DATABASE_PORT=${MYSQL_DATABASE_PORT}",
+                        "SECRET_KEY=${SECRET_KEY}"
                     ]
                    
                     // 환경 변수 문자열로 변환

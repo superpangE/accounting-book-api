@@ -4,24 +4,24 @@ class AccountingBookService:
     def __init__(self):
         self.repository = AccountingBookRepository()
 
-    def create_entry(self, data):
-        return self.repository.create(data)
+    def create_entry(self, user_id, data):
+        return self.repository.create(user_id, data)
 
-    def get_entry(self, id):
-        return self.repository.get_by_id(id)
+    def get_entry(self, user_id, id):
+        return self.repository.get_by_id(user_id, id)
 
-    def update_entry(self, id, data):
-        entry = self.repository.get_by_id(id)
+    def update_entry(self, user_id, id, data):
+        entry = self.repository.get_by_id(user_id, id)
         if not entry:
             return None
-        return self.repository.update(entry, data)
+        return self.repository.update(user_id, entry, data)
 
-    def delete_entry(self, id):
-        entry = self.repository.get_by_id(id)
+    def delete_entry(self, user_id, id):
+        entry = self.repository.get_by_id(user_id, id)
         if not entry:
             return False
-        self.repository.delete(entry)
+        self.repository.delete(user_id, entry)
         return True
 
-    def list_entries(self, start_date=None, end_date=None):
-        return self.repository.get_all(start_date, end_date)
+    def list_entries(self, user_id, start_date=None, end_date=None):
+        return self.repository.get_all(user_id, start_date, end_date)

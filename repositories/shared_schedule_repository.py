@@ -3,8 +3,9 @@ from models.shared_schedule import SharedSchedule
 from datetime import datetime
 
 class SharedScheduleRepository:
-    def create(self, data):
+    def create(self, user_id, data):
         new_schedule = SharedSchedule(
+            user_id=user_id,
             person=data['person'],
             description=data['description'],
             date=datetime.fromisoformat(data['date'])
@@ -13,19 +14,28 @@ class SharedScheduleRepository:
         db.session.commit()
         return new_schedule
 
-    def get_all(self):
-        return SharedSchedule.query.all()
+    def get_all(self, user_id):
+        return SharedSchedule.query.filter_by(user_id=user_id).all()
 
-    def get_by_id(self, id):
-        return SharedSchedule.query.get(id)
+    def get_by_id(self, user_id, id):
+        return SharedSchedule.query.filter_by(user_id=user_id, id=id).first()
 
-    def update(self, schedule, data):
+    def update(self, user_id, schedule, data):
+        # Ensure the schedule belongs to the user before updating
+        if schedule.user_id != user_id:
+            return None # Or raise an exception for unauthorized access
         schedule.person = data.get('person', schedule.person)
         schedule.description = data.get('description', schedule.description)
         schedule.date = datetime.fromisoformat(data.get('date', schedule.date.isoformat()))
         db.session.commit()
         return schedule
 
-    def delete(self, schedule):
+    def delete(self, user_id, schedule):
+        # Ensure the schedule belongs to the user before deleting
+        if schedule.user_id != user_id:
+            return False # Or raise an exception for unauthorized access
         db.session.delete(schedule)
         db.session.commit()
+
+    def get_schedules_by_user_id(self, user_id):
+        return SharedSchedule.query.filter_by(user_id=user_id).all()
