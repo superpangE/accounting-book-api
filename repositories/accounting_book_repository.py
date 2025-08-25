@@ -25,7 +25,12 @@ class AccountingBookRepository:
         # Ensure the entry belongs to the user before updating
         if entry.user_id != user_id:
             return None # Or raise an exception for unauthorized access
-        entry.is_send = data.get('is_send', entry.is_send)
+        if 'person' in data:
+            entry.person = data['person']
+        if 'category' in data:
+            entry.category = data['category']
+        if 'is_send' in data:
+            entry.is_send = data['is_send']
         db.session.commit()
         return entry
 

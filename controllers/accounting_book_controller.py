@@ -35,12 +35,19 @@ def get_accounting_entry(id):
 @token_required
 def update_accounting_entry(id):
     data = request.get_json()
-    if not data or 'is_send' not in data:
-        return jsonify({"error": "Invalid JSON or missing 'is_send' field"}), 400
+    if not data:
+        return jsonify({"error": "Invalid JSON"}), 400
+
+    update_data = {}
+    if 'is_send' in data:
+        update_data['is_send'] = data['is_send']
+    elif 'person' in data and 'category' in data:
+        update_data['person'] = data['person']
+        update_data['category'] = data['category']
+    else:
+        return jsonify({"error": "Invalid request body. Provide 'is_send' or both 'person' and 'category'"}), 400
 
     try:
-        # Only allow updating is_send field
-        update_data = {'is_send': data['is_send']}
         updated_entry = service.update_entry(g.user_id, id, update_data)
         if not updated_entry:
             return jsonify({"error": "Entry not found"}), 404
