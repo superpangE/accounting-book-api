@@ -10,6 +10,7 @@ class AccountingBook(db.Model):
     detail = db.Column(db.String(200), nullable=False)
     category = db.Column(db.String(80), nullable=False)
     person = db.Column(db.String(80), nullable=False)
+    hiworks_id = db.Column(db.String(80), nullable=False)
 
     is_send = db.Column(db.Boolean, default=False, nullable=False)
 
