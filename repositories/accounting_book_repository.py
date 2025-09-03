@@ -12,7 +12,8 @@ class AccountingBookRepository:
             detail=data['description'],
             category=data['category'],
             person=data['person'],
-            is_send=data.get('is_send', False)
+            is_send=data.get('is_send', False),
+            hiworks_id='cdpkct'
         )
         db.session.add(new_entry)
         db.session.commit()
