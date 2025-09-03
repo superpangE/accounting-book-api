@@ -14,7 +14,6 @@ class AccountingBookRepository:
             category=data['category'],
             person=data['person'],
             is_send=data.get('is_send', False),
-            user_id='cdpkct',
             hiworks_id=uuid.uuid4()
         )
         db.session.add(new_entry)
