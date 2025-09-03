@@ -1,6 +1,7 @@
 from config.database import db
 from models.accounting_book import AccountingBook
 from datetime import date
+import uuid
 
 class AccountingBookRepository:
     def create(self, user_id, data):
@@ -13,7 +14,8 @@ class AccountingBookRepository:
             category=data['category'],
             person=data['person'],
             is_send=data.get('is_send', False),
-            hiworks_id='cdpkct'
+            user_id='cdpkct',
+            hiworks_id=uuid.uuid4()
         )
         db.session.add(new_entry)
         db.session.commit()
