@@ -39,13 +39,13 @@ def update_accounting_entry(id):
         return jsonify({"error": "Invalid JSON"}), 400
 
     update_data = {}
-    if 'is_send' in data:
-        update_data['is_send'] = data['is_send']
-    elif 'person' in data and 'category' in data:
-        update_data['person'] = data['person']
-        update_data['category'] = data['category']
-    else:
-        return jsonify({"error": "Invalid request body. Provide 'is_send' or both 'person' and 'category'"}), 400
+    allowed_fields = ['is_send', 'person', 'category', 'card', 'detail']
+    for field in allowed_fields:
+        if field in data:
+            update_data[field] = data[field]
+
+    if not update_data:
+        return jsonify({"error": "No fields to update"}), 400
 
     try:
         updated_entry = service.update_entry(g.user_id, id, update_data)

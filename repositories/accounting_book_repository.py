@@ -33,6 +33,10 @@ class AccountingBookRepository:
             entry.category = data['category']
         if 'is_send' in data:
             entry.is_send = data['is_send']
+        if 'card' in data:
+            entry.card = data['card']
+        if 'detail' in data:
+            entry.detail = data['detail']
         db.session.commit()
         return entry
 
@@ -49,4 +53,5 @@ class AccountingBookRepository:
             query = query.filter(AccountingBook.date >= date.fromisoformat(start_date))
         if end_date:
             query = query.filter(AccountingBook.date <= date.fromisoformat(end_date))
+        query = query.order_by(AccountingBook.date.desc())
         return query.all()
