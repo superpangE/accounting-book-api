@@ -7,7 +7,9 @@ class AlarmRepository:
         new_alarm = Alarm(
             message=data['message'],
             alert_at=datetime.fromisoformat(data['alert_at']),
-            schedule_id=data['schedule_id']
+            schedule_id=data['schedule_id'],
+            notify_one_hour_before=data.get('notify_one_hour_before', False),
+            notify_one_day_before=data.get('notify_one_day_before', False)
         )
         db.session.add(new_alarm)
         db.session.commit()
@@ -19,6 +21,8 @@ class AlarmRepository:
     def update(self, alarm, data):
         alarm.message = data.get('message', alarm.message)
         alarm.alert_at = datetime.fromisoformat(data.get('alert_at', alarm.alert_at.isoformat()))
+        alarm.notify_one_hour_before = data.get('notify_one_hour_before', alarm.notify_one_hour_before)
+        alarm.notify_one_day_before = data.get('notify_one_day_before', alarm.notify_one_day_before)
         db.session.commit()
         return alarm
 

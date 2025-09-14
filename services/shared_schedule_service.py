@@ -13,7 +13,9 @@ class SharedScheduleService:
         alarm_data = {
             'message': alarm_message,
             'alert_at': new_schedule.date.isoformat(),
-            'schedule_id': new_schedule.id
+            'schedule_id': new_schedule.id,
+            'notify_one_hour_before': new_schedule.notify_one_hour_before,
+            'notify_one_day_before': new_schedule.notify_one_day_before
         }
         self.alarm_repository.create(alarm_data) # Assuming alarm is not directly user-specific, but tied to schedule
         return new_schedule
@@ -35,7 +37,9 @@ class SharedScheduleService:
             alarm_message = f"{updated_schedule.person}-{updated_schedule.description}"
             alarm_data = {
                 'message': alarm_message,
-                'alert_at': updated_schedule.date.isoformat()
+                'alert_at': updated_schedule.date.isoformat(),
+                'notify_one_hour_before': updated_schedule.notify_one_hour_before,
+                'notify_one_day_before': updated_schedule.notify_one_day_before
             }
             self.alarm_repository.update(alarm, alarm_data)
         return updated_schedule
