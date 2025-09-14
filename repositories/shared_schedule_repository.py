@@ -8,7 +8,9 @@ class SharedScheduleRepository:
             user_id=user_id,
             person=data['person'],
             description=data['description'],
-            date=datetime.fromisoformat(data['date'])
+            date=datetime.fromisoformat(data['date']),
+            notify_one_hour_before=data.get('notify_one_hour_before', False),
+            notify_one_day_before=data.get('notify_one_day_before', False)
         )
         db.session.add(new_schedule)
         db.session.commit()
@@ -27,6 +29,8 @@ class SharedScheduleRepository:
         schedule.person = data.get('person', schedule.person)
         schedule.description = data.get('description', schedule.description)
         schedule.date = datetime.fromisoformat(data.get('date', schedule.date.isoformat()))
+        schedule.notify_one_hour_before = data.get('notify_one_hour_before', schedule.notify_one_hour_before)
+        schedule.notify_one_day_before = data.get('notify_one_day_before', schedule.notify_one_day_before)
         db.session.commit()
         return schedule
 
