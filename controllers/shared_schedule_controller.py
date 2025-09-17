@@ -26,7 +26,13 @@ def create_shared_schedule():
 @token_required
 def get_all_shared_schedules():
     try:
-        schedules = service.get_all_schedules(g.user_id)
+        start_date_str = request.args.get('start_date')
+        end_date_str = request.args.get('end_date')
+        
+        start_date = datetime.fromisoformat(start_date_str) if start_date_str else None
+        end_date = datetime.fromisoformat(end_date_str) if end_date_str else None
+
+        schedules = service.get_all_schedules(g.user_id, start_date, end_date)
         return jsonify([schedule.to_dict() for schedule in schedules]), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500

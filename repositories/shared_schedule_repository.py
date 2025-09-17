@@ -16,8 +16,13 @@ class SharedScheduleRepository:
         db.session.commit()
         return new_schedule
 
-    def get_all(self, user_id):
-        return SharedSchedule.query.filter_by(user_id=user_id).all()
+    def get_all(self, user_id, start_date=None, end_date=None):
+        query = SharedSchedule.query.filter_by(user_id=user_id)
+        if start_date:
+            query = query.filter(SharedSchedule.date >= start_date)
+        if end_date:
+            query = query.filter(SharedSchedule.date <= end_date)
+        return query.all()
 
     def get_by_id(self, user_id, id):
         return SharedSchedule.query.filter_by(user_id=user_id, id=id).first()

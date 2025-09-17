@@ -20,8 +20,8 @@ class SharedScheduleService:
         self.alarm_repository.create(alarm_data) # Assuming alarm is not directly user-specific, but tied to schedule
         return new_schedule
 
-    def get_all_schedules(self, user_id):
-        return self.repository.get_all(user_id)
+    def get_all_schedules(self, user_id, start_date=None, end_date=None):
+        return self.repository.get_all(user_id, start_date, end_date)
 
     def get_schedule_by_id(self, user_id, id):
         return self.repository.get_by_id(user_id, id)
