@@ -13,11 +13,7 @@ def init_db(app):
     DB_HOST = os.getenv('DATABASE_HOST', 'host')
     DB_PORT = os.getenv('MYSQL_DATABASE_PORT', '3306')
     DB_NAME = "accounting_book"
-    ALARM_DB_NAME = "alarm_db"
 
     app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
-    app.config['SQLALCHEMY_BINDS'] = {
-        'alarm_db': f'mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{ALARM_DB_NAME}'
-    }
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)

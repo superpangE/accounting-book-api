@@ -4,7 +4,6 @@ import re
 from config.database import db, init_db
 from controllers.accounting_book_controller import accounting_book_bp
 from controllers.shared_schedule_controller import shared_schedule_bp
-from models.alarm import Alarm # Import Alarm model to ensure table creation
 
 app = Flask(__name__)
 
