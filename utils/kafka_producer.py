@@ -46,34 +46,34 @@ class KafkaScheduleProducer:
         else:
             date = date.astimezone(kst)
 
+        base_message = {
+            'message': description,
+            'person': person,
+            'schedule_id': schedule_id
+        }
+
         messages = []
 
         # Alert at exact time
         messages.append({
-            'message': description,
-            'person': person,
-            'alert_at': date.isoformat(),
-            'schedule_id': schedule_id
+            **base_message,
+            'alert_at': date.isoformat()
         })
 
         # Alert 1 hour before
         if notify_one_hour_before:
             one_hour_before = date - timedelta(hours=1)
             messages.append({
-                'message': description,
-                'person': person,
-                'alert_at': one_hour_before.isoformat(),
-                'schedule_id': schedule_id
+                **base_message,
+                'alert_at': one_hour_before.isoformat()
             })
 
         # Alert 1 day before
         if notify_one_day_before:
             one_day_before = date - timedelta(days=1)
             messages.append({
-                'message': description,
-                'person': person,
-                'alert_at': one_day_before.isoformat(),
-                'schedule_id': schedule_id
+                **base_message,
+                'alert_at': one_day_before.isoformat()
             })
 
         # Send all messages
