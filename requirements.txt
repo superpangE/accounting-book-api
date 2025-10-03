@@ -6,3 +6,4 @@ Flask-Cors==4.0.0
 PyJWT
 pytest
 kafka-python==2.0.2
+pytz
