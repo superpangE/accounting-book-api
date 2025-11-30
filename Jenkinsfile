@@ -74,7 +74,6 @@ pipeline {
     post {
         always {
             echo 'Pipeline finished.'
-            cleanWs(deleteDirs: true, disableDeferredWipeout: true, force: true)
         }
         success {
             echo 'Deployment successful!'
