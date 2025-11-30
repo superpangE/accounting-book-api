@@ -11,7 +11,7 @@ def init_db(app):
     DB_USER = os.getenv('DATABASE_USER', 'user')
     DB_PASSWORD = os.getenv('DATABASE_PASSWORD', 'password')
     DB_HOST = os.getenv('DATABASE_HOST', 'host')
-    DB_PORT = 3209
+    DB_PORT = 3306
     DB_NAME = "accounting_book"
 
     app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
